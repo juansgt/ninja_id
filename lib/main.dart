@@ -6,8 +6,16 @@ void main() {
   ));
 }
 
-class NinjaCard extends StatelessWidget {
+class NinjaCard extends StatefulWidget {
   const NinjaCard({super.key});
+
+  @override
+  State<NinjaCard> createState() => _NinjaCardState();
+}
+
+class _NinjaCardState extends State<NinjaCard> {
+
+  int ninjaLevel = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -22,30 +30,39 @@ class NinjaCard extends StatelessWidget {
         backgroundColor: Colors.grey[850],
         elevation: 0.0,
       ),
-      body: const Padding(
-        padding: EdgeInsets.fromLTRB(30, 40, 30, 0),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            increaseLevelByOne();
+          });
+        },
+        backgroundColor: Colors.grey[800],
+        child: const Icon(Icons.add),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(30, 40, 30, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Center(
+            const Center(
               child: CircleAvatar(
                 backgroundImage: AssetImage('assets/chun-li.jpg'),
                 radius: 40.0,
               ),
             ),
-            Divider(
+            const Divider(
               height: 60.0,
               color: Colors.grey,
             ),
-            Text(
+            const Text(
               'NAME',
               style: TextStyle(
                 color: Colors.grey,
                 letterSpacing: 2.0,
               ),
             ),
-            SizedBox(height: 10),
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               'Chu-Li',
               style: TextStyle(
                 color: Colors.amberAccent,
@@ -54,26 +71,26 @@ class NinjaCard extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10,),
-            Text(
+            const SizedBox(height: 10,),
+            const Text(
               'CURRENT NINJA LEVEL ',
               style: TextStyle(
                 color: Colors.grey,
                 letterSpacing: 2.0,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
-              '8',
-              style: TextStyle(
+              '$ninjaLevel',
+              style: const TextStyle(
                 color: Colors.amberAccent,
                 letterSpacing: 2.0,
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
-            Row(
+            const SizedBox(height: 10),
+            const Row(
               children: <Widget>[
                 Icon(
                   Icons.email,
@@ -95,5 +112,9 @@ class NinjaCard extends StatelessWidget {
         ),
       ),
     );
+  }
+  
+  void increaseLevelByOne() {
+    ninjaLevel++;
   }
 }
